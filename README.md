@@ -1,6 +1,6 @@
 # Go Webservice mit Logging und Tracking
 
-Dies ist eine Beispielanwendung für einen Webservice in Go, der einfache mathematische Operationen bereitstellt.
+Dies ist ein Webservice in Go, der einfache mathematische Operationen bereitstellt.
 
 ## Funktionen
 

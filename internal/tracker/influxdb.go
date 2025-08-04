@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/influxdata/influxdb-client-go/v2"
+	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"github.com/rs/zerolog/log"
 )
 
@@ -35,6 +35,6 @@ func (t *InfluxDBTracker) TrackOperation(opName string, duration time.Duration, 
 
 	err := writeAPI.WritePoint(context.Background(), p)
 	if err != nil {
-		log.Error().Err(err).Msg("Fehler beim Senden der Metrik an InfluxDB")
+		log.Error().Err(err).Msg("error writing point to InfluxDB")
 	}
 }
