@@ -16,9 +16,9 @@ type InfluxDBTracker struct {
 }
 
 // NewInfluxDBTracker erstellt eine neue InfluxDBTracker-Instanz.
-func NewInfluxDBTracker(url, token, org, bucket string) *InfluxDBTracker {
+func NewInfluxDBTracker(url, token, org, bucket string) InfluxDBTracker {
 	client := influxdb2.NewClient(url, token)
-	return &InfluxDBTracker{
+	return InfluxDBTracker{
 		client: client,
 		org:    org,
 		bucket: bucket,
@@ -26,7 +26,7 @@ func NewInfluxDBTracker(url, token, org, bucket string) *InfluxDBTracker {
 }
 
 // TrackOperation sendet die Ausführungsdauer einer Operation an InfluxDB.
-func (t *InfluxDBTracker) TrackOperation(opName string, duration time.Duration, success bool) {
+func (t InfluxDBTracker) TrackOperation(opName string, duration time.Duration, success bool) {
 	writeAPI := t.client.WriteAPIBlocking(t.org, t.bucket)
 	p := influxdb2.NewPoint("operation_duration",
 		map[string]string{"operation": opName, "status": "success"},

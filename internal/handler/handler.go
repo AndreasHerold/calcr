@@ -19,7 +19,7 @@ const (
 )
 
 // handleOperation ist ein Handler-Wrapper für die mathematischen Routen.
-func HandleAddOperation(op func(float64, float64) float64, s storage.ResultStorage, t *tracker.InfluxDBTracker) http.HandlerFunc {
+func HandleAddOperation(op func(float64, float64) float64, s storage.ResultStorage, t tracker.Tracker) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		aStr := r.URL.Query().Get("SummandOne")
 		bStr := r.URL.Query().Get("SummandTwo")
@@ -55,9 +55,9 @@ func HandleAddOperation(op func(float64, float64) float64, s storage.ResultStora
 }
 
 // handleOperation ist ein Handler-Wrapper für die mathematischen Routen.
-func HandleSubOperation(op func(float64, float64) float64, s storage.ResultStorage, t *tracker.InfluxDBTracker) http.HandlerFunc {
+func HandleSubOperation(op func(float64, float64) float64, s storage.ResultStorage, t tracker.Tracker) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		aStr := r.URL.Query().Get("Minuent")
+		aStr := r.URL.Query().Get("Minuend")
 		bStr := r.URL.Query().Get("Subtrahend")
 
 		a, errA := strconv.ParseFloat(aStr, 64)
@@ -65,7 +65,7 @@ func HandleSubOperation(op func(float64, float64) float64, s storage.ResultStora
 
 		if errA != nil || errB != nil {
 			log.Error().Err(fmt.Errorf("error parsing parameters: a=%s, b=%s", aStr, bStr)).Msg("invalid parameters")
-			http.Error(w, "Invalid parameters: 'Minuent' and 'Subtrahend' must be valid numbers.", http.StatusBadRequest)
+			http.Error(w, "Invalid parameters: 'Minuend' and 'Subtrahend' must be valid numbers.", http.StatusBadRequest)
 			return
 		}
 
@@ -91,7 +91,7 @@ func HandleSubOperation(op func(float64, float64) float64, s storage.ResultStora
 }
 
 // handleOperation ist ein Handler-Wrapper für die mathematischen Routen.
-func HandleMultiOperation(op func(float64, float64) float64, s storage.ResultStorage, t *tracker.InfluxDBTracker) http.HandlerFunc {
+func HandleMultiOperation(op func(float64, float64) float64, s storage.ResultStorage, t tracker.Tracker) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		aStr := r.URL.Query().Get("FaktorOne")
 		bStr := r.URL.Query().Get("FaktorTwo")
@@ -127,7 +127,7 @@ func HandleMultiOperation(op func(float64, float64) float64, s storage.ResultSto
 }
 
 // handleOperation ist ein Handler-Wrapper für die mathematischen Routen.
-func HandleDivOperation(op func(float64, float64) float64, s storage.ResultStorage, t *tracker.InfluxDBTracker) http.HandlerFunc {
+func HandleDivOperation(op func(float64, float64) float64, s storage.ResultStorage, t tracker.Tracker) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		aStr := r.URL.Query().Get("Dividend")
 		bStr := r.URL.Query().Get("Divisor")

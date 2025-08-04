@@ -1,30 +1,13 @@
 version: '3.8'
 
 services:
-  webservice:
-    build: .
-    ports:
-      - "8080:8080"
-    environment:
-      # Startparameter für die Datenbank. `true` oder `false`
-      USE_DB: "true"
-      # MySQL-DSN (Datenbank-Benutzer, -Passwort, -Host, -Port, -Name)
-      MYSQL_DSN: "user:password@tcp(mysql:3306)/webservice?parseTime=true"
-      # InfluxDB-Konfiguration
-      INFLUX_URL: "http://influxdb:8086"
-      INFLUX_TOKEN: "your_influx_token"
-      INFLUX_ORG: "your_org"
-      INFLUX_BUCKET: "webservice_metrics"
-    depends_on:
-      - mysql
-      - influxdb
 
   mysql:
     image: mysql:8.0
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: webservice
+      MYSQL_DATABASE: calcr
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
@@ -43,8 +26,8 @@ services:
       DOCKER_INFLUXDB_INIT_MODE: setup
       DOCKER_INFLUXDB_INIT_USERNAME: admin
       DOCKER_INFLUXDB_INIT_PASSWORD: password
-      DOCKER_INFLUXDB_INIT_ORG: your_org
-      DOCKER_INFLUXDB_INIT_BUCKET: webservice_metrics
+      DOCKER_INFLUXDB_INIT_ORG: andreasherold
+      DOCKER_INFLUXDB_INIT_BUCKET: calcr_metrics
       DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: your_influx_token
 
 volumes:

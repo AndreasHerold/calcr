@@ -11,6 +11,27 @@ Dies ist ein Webservice in Go, der einfache mathematische Operationen bereitstel
 * **Docker Compose:** Eine `docker-compose.yml` Datei zum einfachen Starten aller Dienste (Webservice, MySQL, InfluxDB).
 * **Makefile:** Enthält nützliche Befehle zum Builden und Ausführen der Anwendung.
 
+## Konfiguration
+
+Die Anwendung kann über die Datei `config/config.yaml` konfiguriert werden. Alternativ können auch Umgebungsvariablen verwendet werden, die Vorrang vor den Werten in der Konfigurationsdatei haben.
+
+**Konfigurationsoptionen:**
+
+```yaml
+database:
+  enabled: false  # entspricht USE_DB
+  dsn: ""        # entspricht MYSQL_DSN
+
+influxdb:
+  url: ""        # entspricht INFLUX_URL
+  token: ""      # entspricht INFLUX_TOKEN
+  org: ""        # entspricht INFLUX_ORG
+  bucket: ""     # entspricht INFLUX_BUCKET
+
+server:
+  port: 8080     # Port, auf dem der Webservice läuft
+```
+
 ## Starten der Anwendung
 
 1.  **Voraussetzungen:** Docker und Docker Compose müssen installiert sein.
@@ -31,10 +52,32 @@ Der Webservice läuft standardmäßig auf `http://localhost:8080`.
 
 **Beispielanfragen:**
 
-* **Addition:** `http://localhost:8080/add?SummandOne=10&SummandTwo=5`
-* **Subtraktion:** `http://localhost:8080/subtract?SummandOne=20&SummandTwo=8`
-* **Multiplikation:** `http://localhost:8080/multiply?SummandOne=7&SummandTwo=6`
-* **Division:** `http://localhost:8080/divide?SummandOne=100&SummandTwo=10`
-* **Letzte Ergebnisse:** `http://localhost:8080/results?RecentN=10`
+* **Addition:** 
+```bash
+curl http://localhost:8080/add?SummandOne=10&SummandTwo=5
+```
+
+
+* **Subtraktion:** 
+```bash
+curl http://localhost:8080/subtract?Minuend=20&Subtrahend=8
+```
+* **Multiplikation:** 
+
+```bash
+curl http://localhost:8080/multiply?FaktorOne=7&FaktorTwo=6
+```
+
+* **Division:** 
+
+```bash
+curl http://localhost:8080/divide?Dividend=100&Divisor=10
+```
+
+* **Letzte Ergebnisse:** 
+
+```bash
+curl http://localhost:8080/results?RecentN=10
+```
 
 Der Rückgabewert ist eine Liste der letzten 5 (oder `RecentN`) Operationen.

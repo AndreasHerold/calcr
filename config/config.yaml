@@ -1,0 +1,16 @@
+# Datenbank-Konfiguration
+database:
+  enabled: false  # entspricht USE_DB
+  dsn: ""        # entspricht MYSQL_DSN
+
+# InfluxDB-Konfiguration
+influxdb:
+  enabled: false  # entspricht INFLUX_ENABLED
+  url: ""        # entspricht INFLUX_URL
+  token: ""      # entspricht INFLUX_TOKEN
+  org: ""        # entspricht INFLUX_ORG
+  bucket: ""     # entspricht INFLUX_BUCKET
+
+# Server-Konfiguration
+server:
+  port: 8080
