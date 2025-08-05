@@ -24,4 +24,5 @@ func (r Result) String() string {
 type ResultStorage interface {
 	AddResult(result Result) error
 	GetRecentResults(n int) ([]Result, error)
+	Close() error
 }

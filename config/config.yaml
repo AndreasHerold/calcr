@@ -1,15 +1,15 @@
 # Datenbank-Konfiguration
 database:
-  enabled: false  # entspricht USE_DB
-  dsn: ""        # entspricht MYSQL_DSN
+  enabled: true   # entspricht USE_DB
+  dsn: "user:password@tcp(localhost:3306)/calcr"    # entspricht MYSQL_DSN
 
 # InfluxDB-Konfiguration
 influxdb:
-  enabled: false  # entspricht INFLUX_ENABLED
-  url: ""        # entspricht INFLUX_URL
-  token: ""      # entspricht INFLUX_TOKEN
-  org: ""        # entspricht INFLUX_ORG
-  bucket: ""     # entspricht INFLUX_BUCKET
+  enabled: true   # entspricht INFLUX_ENABLED
+  url: "http://localhost:8086"        # entspricht INFLUX_URL
+  token: "49fff1905acab043e75bae4d3350352c8f7e400e98c4b9f99698788c4a2146ba"      # entspricht INFLUX_TOKEN
+  org: "andreasherold"        # entspricht INFLUX_ORG
+  bucket: "calcr_metrics"     # entspricht INFLUX_BUCKET
 
 # Server-Konfiguration
 server:

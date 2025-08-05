@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS results (id INT AUTO_INCREMENT PRIMARY KEY, operation VARCHAR(50), input_a FLOAT, input_b FLOAT, output FLOAT, timestamp DATETIME);

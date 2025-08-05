@@ -36,6 +36,7 @@ func main() {
 
 	// Initialisierung des Storages
 	resultStorage := initResultStorage(cfg)
+	defer resultStorage.Close()
 
 	// Initialisierung des Trackers
 	trackerClient := initTracker(cfg)
@@ -63,7 +64,6 @@ func initResultStorage(cfg *config.Config) storage.ResultStorage {
 		if err != nil {
 			log.Fatal().Err(err).Msg("error while connecting to database.")
 		}
-		defer db.Close()
 
 		if err = db.Ping(); err != nil {
 			log.Fatal().Err(err).Msg("mysql ping error.")

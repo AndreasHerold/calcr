@@ -1,9 +1,9 @@
-version: '3.8'
+version: '3.9'
 
 services:
 
   mysql:
-    image: mysql:8.0
+    image: docker.io/library/mysql:8.0
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
@@ -14,9 +14,10 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./data/changesets:/docker-entrypoint-initdb.d
 
   influxdb:
-    image: influxdb:2.0
+    image: docker.io/library/influxdb:2.0
     restart: always
     ports:
       - "8086:8086"
@@ -28,7 +29,7 @@ services:
       DOCKER_INFLUXDB_INIT_PASSWORD: password
       DOCKER_INFLUXDB_INIT_ORG: andreasherold
       DOCKER_INFLUXDB_INIT_BUCKET: calcr_metrics
-      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: your_influx_token
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: 49fff1905acab043e75bae4d3350352c8f7e400e98c4b9f99698788c4a2146ba
 
 volumes:
   mysql-data:

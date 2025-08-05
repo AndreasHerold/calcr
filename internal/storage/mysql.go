@@ -14,6 +14,13 @@ func NewMySQLStorage(db *sql.DB) *MySQLStorage {
 	return &MySQLStorage{db: db}
 }
 
+func (s *MySQLStorage) Close() error {
+	if s.db != nil {
+		return s.db.Close()
+	}
+	return nil
+}
+
 // AddResult fügt ein Ergebnis in die MySQL-Datenbank ein.
 func (s *MySQLStorage) AddResult(result Result) error {
 	_, err := s.db.Exec("INSERT INTO results (operation, input_a, input_b, output, timestamp) VALUES (?, ?, ?, ?, ?)",

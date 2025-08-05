@@ -17,6 +17,12 @@ func NewInMemoryStorage() *InMemoryStorage {
 	}
 }
 
+// Close schließt die InMemoryStorage-Instanz. Da es sich um eine In-Memory-Lösung handelt, ist hier keine Aktion erforderlich.
+func (s *InMemoryStorage) Close() error {
+	// Keine Aktion erforderlich, da es sich um eine In-Memory-Lösung handelt.
+	return nil
+}
+
 // AddResult fügt ein Ergebnis hinzu.
 func (s *InMemoryStorage) AddResult(result Result) error {
 	s.mu.Lock()

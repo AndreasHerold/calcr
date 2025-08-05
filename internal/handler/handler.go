@@ -86,7 +86,7 @@ func HandleSubOperation(op func(float64, float64) float64, s storage.ResultStora
 		go t.TrackOperation(subtractOperation, duration, true)
 
 		w.Header().Set("Content-Type", "application/json")
-		fmt.Fprintf(w, `{"operation": "%s", "SummandOne": %f, "SummandTwo": %f, "Difference": %f}`, subtractOperation, a, b, result)
+		fmt.Fprintf(w, `{"operation": "%s", "Minuend": %f, "Subtrahend": %f, "Difference": %f}`, subtractOperation, a, b, result)
 	}
 }
 
@@ -122,7 +122,7 @@ func HandleMultiOperation(op func(float64, float64) float64, s storage.ResultSto
 		go t.TrackOperation(multiplyOperation, duration, true)
 
 		w.Header().Set("Content-Type", "application/json")
-		fmt.Fprintf(w, `{"operation": "%s", "SummandOne": %f, "SummandTwo": %f, "Product": %f}`, multiplyOperation, a, b, result)
+		fmt.Fprintf(w, `{"operation": "%s", "FaktorOne": %f, "FaktorTwo": %f, "Product": %f}`, multiplyOperation, a, b, result)
 	}
 }
 
@@ -158,7 +158,7 @@ func HandleDivOperation(op func(float64, float64) float64, s storage.ResultStora
 		go t.TrackOperation(divideOperation, duration, true)
 
 		w.Header().Set("Content-Type", "application/json")
-		fmt.Fprintf(w, `{"operation": "%s", "SummandOne": %f, "SummandTwo": %f, "Quotient": %f}`, divideOperation, a, b, result)
+		fmt.Fprintf(w, `{"operation": "%s", "Dividend": %f, "Divisor": %f, "Quotient": %f}`, divideOperation, a, b, result)
 	}
 }
 
