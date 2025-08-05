@@ -2,6 +2,7 @@ package storage
 
 import (
 	"database/sql"
+	"time"
 )
 
 // MySQLStorage speichert Ergebnisse in einer MySQL-Datenbank.
@@ -37,10 +38,15 @@ func (s *MySQLStorage) GetRecentResults(n int) ([]Result, error) {
 	defer rows.Close()
 
 	var results []Result
+	var dbTimestamp string
 	for rows.Next() {
 		var r Result
-		if err := rows.Scan(&r.Operation, &r.InputA, &r.InputB, &r.Output, &r.Timestamp); err != nil {
+		if err := rows.Scan(&r.Operation, &r.InputA, &r.InputB, &r.Output, &dbTimestamp); err != nil {
 			return nil, err
+		}
+		r.Timestamp, err = time.Parse("2006-01-02 15:04:05", dbTimestamp)
+		if err != nil {
+			continue // Fehler beim Parsen des Timestamps, überspringe diesen Eintrag
 		}
 		results = append(results, r)
 	}
