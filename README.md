@@ -38,7 +38,7 @@ server:
 2.  **Abhängigkeiten:** Stelle sicher, dass die Go-Abhängigkeiten installiert sind: `go mod tidy`.
 3.  **Docker Compose starten:**
     ```sh
-    docker-compose up --build
+    podman-compose up -d
     ```
 4.  **Datenbank einrichten (optional, falls `USE_DB=true`):**
     Wenn du die Datenbank verwenden möchtest, musst du die Tabelle erstellen:
